@@ -32,7 +32,7 @@ exports.storeCustomer = async(req, res)=>{
             const  {title, fname, lname, addressline, town, zipcode, phone, creditlimit, level } = req.body;
             const value = [ title, fname, lname, addressline, town, zipcode, phone, creditlimit, level ];
 
-            const sql = "INSERT INTO customers(fname, lname, addressline, town, zipcode, phone, creditlimit, level ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            const sql = "INSERT INTO customers(title, fname, lname, addressline, town, zipcode, phone, creditlimit, level ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             con.query(sql, value, (err, result)=>{
                 
