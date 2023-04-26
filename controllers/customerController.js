@@ -75,3 +75,30 @@ exports.getOneCustomer = async(req, res)=>{
         res.status(500).json(err);
     }
 }// end for getOneCustomer
+
+exports.deleteCustomer = async(req, res)=>{
+
+    try{
+
+        const data = await new Promise((resolve, reject)=>{
+
+            const customerId = req.params.id;
+            const sql = "DELETE FROM customers WHERE customer_id=?";
+
+            con.query(sql, [customerId],(err, result)=>{
+
+                if(err){
+                    reject(err);
+                }else{
+                    resolve(result);
+                }
+
+            });
+        });//end of promise
+
+        res.status(200).json(data);
+    }catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
+}//end for deleteCustomer
