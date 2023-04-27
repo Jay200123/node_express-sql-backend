@@ -7,6 +7,6 @@ router.get('/customers', getCustomers);
 router.post('/customers/store', storeCustomer);
 router.get('/customers/edit/:id', getOneCustomer);
 router.put('/customers/update/:id', updateCustomer);
-router.delete('/customers/:id', deleteCustomer);
+router.delete('/customers/delete/:id', deleteCustomer);
 
 module.exports = router;
