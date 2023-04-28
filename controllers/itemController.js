@@ -24,18 +24,29 @@ exports.getItems = async(req, res)=>{
     }
 }//end of getItems
 
-// exports.storeItem = async(req, res)=>{
+exports.storeItem = async(req, res)=>{
 
-//     try{
+    try{
+        const data = await new Promise((resolve, reject)=>{
 
-//         const data = await new Promise((resolve, reject)=>{
+            const { description, cost_price, sell_price, discontinued, category_id } = req.body;
+            const values = [ description, cost_price, sell_price, discontinued, category_id ];
 
-//             const { description, cost_price, sell_price, discontinued, category_id } = req.body;
-//             const values = [ description, cost_price, sell_price, discontinued, category_id ];
+            const sql = "INSERT INTO item(description, cost_price, sell_price, discontinued, category_id) VALUES(?, ?, ?, ?, ?)";
 
-//             const sql = "INSERT INTO items(description, cost_price, sell_price, discontinued, category_id) VALUES(?, ?, ?, ?, ?)";
-            
-//          });
-//     }catch{
-//     }
-// }//end of storeItem
+            con.query(sql, values,(err, result)=>{
+
+                if(err){
+                    reject(err);
+                }else{
+                    resolve(result);
+                }
+            });
+         });// end of promise
+         res.status(201).json(data);
+
+    }catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
+}//end of storeItem

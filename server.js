@@ -3,7 +3,6 @@ const app = express();
 
 require('dotenv').config();
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended:true }));
 
@@ -18,6 +17,7 @@ app.get('/', (req, res)=>{
     const data = { message: "Welcome to Our Home Page!"};
     res.status(200).json(data);
 });
+
 app.all("*", (req, res)=>{
 
     const data = { message: "Error 404 Resource Not Found..."};
