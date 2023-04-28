@@ -50,3 +50,29 @@ exports.storeItem = async(req, res)=>{
         res.status(500).json(err);
     }
 }//end of storeItem
+
+exports.getOneItem = async(req, res)=>{
+
+    try{
+
+        const item = await new Promise((resolve, reject)=>{
+
+            const itemId = req.params.id;
+
+            const sql = "SELECT * FROM item WHERE item_id = ?";
+
+            con.query(sql, [itemId], (err, result)=>{
+
+                if(err){
+                    reject(err);
+                }else{
+                    resolve(result);
+                }
+            });
+        });//end of promise
+        res.status(200).json(item);
+    }catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
+}//end of getOneItem
