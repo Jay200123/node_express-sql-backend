@@ -128,3 +128,26 @@ exports.deleteItem = async(req, res)=>{
         res.status(500).json(err);
     }
 }//end of deleteItem
+
+exports.ItemStocks = async(req, res)=>{
+
+    try{
+        const stocks = await new Promise((resolve, reject)=>{
+
+            const sql = "SELECT item.description, stock.quantity FROM item INNER JOIN stock ON  item.item_id = stock.item_id";
+
+            con.query(sql, (err, result)=>{
+                
+                if(err){
+                    reject(err);
+                }else{
+                    resolve(result);
+                }
+            });
+        });//end of promise
+        res.status(200).json(stocks);
+    }catch(err){
+        res.status(500).json(err);
+
+    }
+}//end for itemStocks
